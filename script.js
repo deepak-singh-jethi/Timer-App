@@ -3,7 +3,7 @@ let timerId = 1;
 
 const timerContainer = document.getElementById("timer-container");
 const audioFileInput = document.getElementById("audioFile");
-const timerSound = new Audio("./mixkit-classic-alarm-995.wav");
+const timerSound = new Audio("./Alarm-Fast-A1-www.fesliyanstudios.com.mp3");
 
 function addTimer() {
   const hours = parseInt(document.getElementById("hours").value) || 0;
@@ -64,7 +64,6 @@ function addTimer() {
 function stopTimer(time_box_id) {
   const time_box = document.getElementById(`${time_box_id}`);
   timerContainer.removeChild(time_box);
-
   timerSound.pause();
 }
 
