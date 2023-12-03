@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Multiple Countdown Timers</title>
+  </head>
+  <body>
+    <div id="main">
+      <h1>Multiple Timers App</h1>
+
+      <!-- copy the same class dynamically -->
+      <div class="time_box">
+        <h3>Set Time:</h3>
+        <div class="timeCntainingBox">
+          <input type="number" id="hours" placeholder="hh" min="0" />:
+          <input
+            type="number"
+            id="minutes"
+            placeholder="mm"
+            min="0"
+            max="59" />:
+          <input type="number" id="seconds" placeholder="ss" min="0" max="59" />
+        </div>
+        <button onclick="addTimer()" id="startTimer">Start</button>
+      </div>
+
+      <div class="currentTime">Current Timers</div>
+    </div>
+
+    <div id="timer-container">
+      <!-- <div class="time_box">
+        <h3>Left Time:</h3>
+
+        <div class="timeCntainingBox">
+
+          
+        </div>
+        <button onclick="stopTimer()">stop timer</button>
+      </div> -->
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
