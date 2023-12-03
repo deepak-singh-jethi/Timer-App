@@ -1,45 +1,32 @@
-// for storing multiple timers so user can delete or add them
 let timers = {};
 let timerId = 1;
 
 const timerContainer = document.getElementById("timer-container");
+const audioFileInput = document.getElementById("audioFile");
+const timerSound = new Audio("./mixkit-classic-alarm-995.wav");
 
 function addTimer() {
-  // hours value
   const hours = parseInt(document.getElementById("hours").value) || 0;
-  //minutes value
   const minutes = parseInt(document.getElementById("minutes").value) || 0;
-
-  // seconds value
   const seconds = parseInt(document.getElementById("seconds").value) || 0;
 
-  // if no input
   if (hours === 0 && minutes === 0 && seconds === 0) {
     alert("Please enter a valid time.");
     return;
   }
 
-  //total time in seconds
   let totalTime = hours * 3600 + minutes * 60 + seconds;
-
-  const timerContainer = document.querySelector("#timer-container");
-  // creating a conatiner that will contain each countdown and stop timer for that countdown
 
   const time_box = document.createElement("div");
   time_box.className = "time_box";
-  //the same id will be given to stop timer button as an attribute so that when button is clcked we can get the timer conatiner to remove it
-  time_box.id = timerId;
-
-  timerId++;
+  time_box.id = timerId++;
 
   const h3 = document.createElement("h3");
   h3.innerText = "Left Time: ";
 
-  // conatiner that will display countdown
   const timeContainingBox = document.createElement("div");
   timeContainingBox.className = "timeCntainingBox";
 
-  //stop button
   const stopButton = document.createElement("button");
   stopButton.innerText = "Stop Timer";
 
@@ -49,7 +36,6 @@ function addTimer() {
 
   time_box.append(h3, timeContainingBox, stopButton);
 
-  //set the countdown at 1s delay
   const countdown = setInterval(function () {
     if (totalTime > 0) {
       totalTime--;
@@ -58,9 +44,14 @@ function addTimer() {
       clearInterval(countdown);
       time_box.removeChild(h3);
       timeContainingBox.innerHTML = "";
-      const finshedHeading = document.createElement("h2");
-      finshedHeading.innerText = "Timer is up!";
-      timeContainingBox.appendChild(finshedHeading);
+
+      // Play the sound when the timer ends
+      timerSound.currentTime = 0;
+      timerSound.play();
+
+      const finishedHeading = document.createElement("h2");
+      finishedHeading.innerText = "Timer is up!";
+      timeContainingBox.appendChild(finishedHeading);
       time_box.classList.add("timeEnd");
 
       stopButton.classList.add("timeEndButton");
@@ -70,14 +61,13 @@ function addTimer() {
   timerContainer.appendChild(time_box);
 }
 
-// function for removing time-box element
 function stopTimer(time_box_id) {
-  console.log("yes");
   const time_box = document.getElementById(`${time_box_id}`);
   timerContainer.removeChild(time_box);
-}
 
-//for updating the time Box text with countdown
+  timerSound.pause();
+  timerSound.currentTime = 0;
+}
 
 function updateTimerDisplay(time_box, totalSeconds) {
   const hours = Math.floor(totalSeconds / 3600);
@@ -89,8 +79,6 @@ function updateTimerDisplay(time_box, totalSeconds) {
   )}:${formatTime(seconds)}`;
   time_box.textContent = formattedTime;
 }
-
-//when time values are in single digit to convert them into double digit
 
 function formatTime(value) {
   return value < 10 ? `0${value}` : value;
