@@ -66,7 +66,6 @@ function stopTimer(time_box_id) {
   timerContainer.removeChild(time_box);
 
   timerSound.pause();
-  timerSound.currentTime = 0;
 }
 
 function updateTimerDisplay(time_box, totalSeconds) {
